@@ -92,6 +92,43 @@ export const MemberControl: React.FC<MemberControlProps> = ({ onBack, lang }) =>
     setIsProcessing(false);
   };
 
+  const handleDeleteMember = async (member: Member) => {
+    if (!confirm(`Hapus member "${member.email}" secara permanen? Data akan dihapus dari sistem.`)) return;
+    setIsProcessing(true);
+    try {
+      const { error } = await supabase.from('members').delete().eq('email', member.email.toLowerCase());
+      if (error) throw error;
+      sendTelegramNotification(`🗑️ *MEMBER DELETED*\nEmail: ${member.email}\nAdmin Action: Removed from system`);
+      alert("Member berhasil dihapus!");
+      refreshData();
+    } catch (e) {
+      alert("Gagal menghapus member.");
+    }
+    setIsProcessing(false);
+  };
+
+  const handleApproveMember = async (member: Member) => {
+    if (!confirm(`Setujui member "${member.email}"? Status akan diubah menjadi aktif.`)) return;
+    setIsProcessing(true);
+    try {
+      const validUntil = new Date();
+      validUntil.setMonth(validUntil.getMonth() + 1); // Default 1 bulan aktif
+      
+      const { error } = await supabase.from('members').update({ 
+        status: 'active',
+        valid_until: validUntil.toISOString()
+      }).eq('email', member.email.toLowerCase());
+      
+      if (error) throw error;
+      sendTelegramNotification(`✅ *MEMBER APPROVED*\nEmail: ${member.email}\nStatus: ACTIVE\nValid Until: ${validUntil.toLocaleDateString()}`);
+      alert("Member berhasil disetujui dan diaktifkan!");
+      refreshData();
+    } catch (e) {
+      alert("Gagal menyetujui member.");
+    }
+    setIsProcessing(false);
+  };
+
   return (
     <div className="space-y-6 pb-20 max-w-7xl mx-auto h-[calc(100vh-140px)] flex flex-col overflow-hidden">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 flex-shrink-0">
