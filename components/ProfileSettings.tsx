@@ -9,6 +9,15 @@ interface ProfileSettingsProps {
   credits: number;
   validUntil: string | null;
   lang: 'id' | 'en';
+  onLogout?: () => void;
+}
+
+interface ProfileSettingsProps {
+  onBack: () => void;
+  userEmail: string;
+  credits: number;
+  validUntil: string | null;
+  lang: 'id' | 'en';
 }
 
 export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ onBack, userEmail, credits, validUntil, lang }) => {

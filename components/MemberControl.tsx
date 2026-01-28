@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase, isUserOnline, approveTopup, manualUpdateCredits } from '../lib/api';
+import { supabase, isUserOnline, approveTopup, manualUpdateCredits, sendTelegramNotification } from '../lib/api';
 
 interface Member {
   id: string | number;
