@@ -123,7 +123,7 @@ export const isAdmin = (email: string) => {
 export const getAdminPassword = () => getEnv('VITE_PASSW') || 'satmoko123';
 
 const GEMINI_API_KEYS = [
-  'AIzaSyA9HGM9Z5wM6oYwd-AItLgq99at012V_io',
+  getEnv('VITE_GEMINI_API_1'),
   getEnv('VITE_GEMINI_API_2'),
   getEnv('VITE_GEMINI_API_3')
 ].filter(Boolean);
