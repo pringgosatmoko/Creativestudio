@@ -122,22 +122,24 @@ export const isAdmin = (email: string) => {
 
 export const getAdminPassword = () => getEnv('VITE_PASSW') || 'satmoko123';
 
-let currentSlot = 1;
+const GEMINI_API_KEYS = [
+  'AIzaSyA9HGM9Z5wM6oYwd-AItLgq99at012V_io',
+  getEnv('VITE_GEMINI_API_2'),
+  getEnv('VITE_GEMINI_API_3')
+].filter(Boolean);
+
+let currentSlot = 0;
 export const rotateApiKey = () => {
-  currentSlot = currentSlot >= 3 ? 1 : currentSlot + 1;
-  const nextKey = getEnv(`VITE_GEMINI_API_${currentSlot}`);
+  currentSlot = (currentSlot + 1) % GEMINI_API_KEYS.length;
   const win = window as any;
-  if (nextKey) {
-    if (!win.process) win.process = { env: {} };
-    if (!win.process.env) win.process.env = {};
-    win.process.env.API_KEY = nextKey;
-  }
-  return nextKey || getEnv('VITE_GEMINI_API_1');
+  if (!win.process) win.process = { env: {} };
+  if (!win.process.env) win.process.env = {};
+  win.process.env.API_KEY = GEMINI_API_KEYS[currentSlot];
+  return GEMINI_API_KEYS[currentSlot];
 };
 
 export const getActiveApiKey = () => {
-  const win = window as any;
-  return win.process?.env?.API_KEY || getEnv('VITE_GEMINI_API_1');
+  return GEMINI_API_KEYS[currentSlot] || GEMINI_API_KEYS[0];
 };
 
 export const auditApiKeys = () => {
