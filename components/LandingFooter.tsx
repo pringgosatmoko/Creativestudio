@@ -70,6 +70,11 @@ export const LandingFooter: React.FC<LandingFooterProps> = ({ lang }) => {
             <a href="#" className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-600 hover:text-cyan-400 transition-all border border-white/5"><i className="fa-brands fa-tiktok"></i></a>
          </div>
       </div>
+
+      {/* COPYRIGHT */}
+      <div className="text-center pb-6">
+         <p className="text-[10px] font-bold text-slate-600 tracking-[0.2em]">© 2026 Satmoko. All Rights Reserved.</p>
+      </div>
     </footer>
   );
 };
