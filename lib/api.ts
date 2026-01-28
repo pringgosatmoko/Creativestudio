@@ -144,10 +144,10 @@ export const getActiveApiKey = () => {
 
 export const auditApiKeys = () => {
   return {
-    slot1: !!getEnv('VITE_GEMINI_API_1'),
-    slot2: !!getEnv('VITE_GEMINI_API_2'),
-    slot3: !!getEnv('VITE_GEMINI_API_3'),
-    currentActive: getActiveApiKey() ? 'TERPASANG' : 'KOSONG',
-    activeSlot: currentSlot
+    slot1: !!GEMINI_API_KEYS[0],
+    slot2: !!GEMINI_API_KEYS[1],
+    slot3: !!GEMINI_API_KEYS[2],
+    currentActive: GEMINI_API_KEYS[currentSlot] ? 'TERPASANG' : 'KOSONG',
+    activeSlot: currentSlot + 1
   };
 };
