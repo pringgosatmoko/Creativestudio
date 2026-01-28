@@ -266,6 +266,22 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ onBack, userEm
          </div>
          <p className="text-[8px] font-black text-slate-600 uppercase tracking-[0.6em]">Encryption Active • Node: SATMOKO_SECURE_VAULT • v7.6.1</p>
       </div>
+
+      {/* Logout Button */}
+      {onLogout && (
+        <div className="flex justify-center pt-6 pb-10">
+          <button 
+            onClick={onLogout}
+            data-testid="profile-logout-btn"
+            className="group flex items-center gap-4 bg-red-500/10 hover:bg-red-500 border border-red-500/20 hover:border-red-400 px-8 py-4 rounded-2xl transition-all shadow-xl active:scale-95"
+          >
+            <i className="fa-solid fa-power-off text-red-500 group-hover:text-white text-lg"></i>
+            <span className="text-[11px] font-black uppercase text-red-500 group-hover:text-white tracking-widest">
+              {lang === 'id' ? 'KELUAR DARI AKUN' : 'SIGN OUT'}
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
