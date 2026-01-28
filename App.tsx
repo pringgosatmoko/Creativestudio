@@ -371,11 +371,12 @@ const App: React.FC = () => {
              {/* MAIN AREA */}
              <main className="flex-1 overflow-y-auto no-scrollbar relative px-4 lg:px-12 py-6 lg:py-10 pb-48 lg:pb-10">
                 
-                {/* GLOBAL REPOSITIONED LOGOUT BUTTON - HANYA MUNCUL DI MENU UTAMA */}
-                {activeFeature === 'menu' && (
+                {/* GLOBAL LOGOUT BUTTON - SELALU MUNCUL DI SEMUA HALAMAN (kecuali profile karena sudah ada) */}
+                {activeFeature !== 'profile' && (
                   <div className="absolute top-6 right-6 lg:top-10 lg:right-12 z-[100] flex items-center gap-3">
                      <button 
                         onClick={handleLogout}
+                        data-testid="global-logout-btn"
                         className="group flex items-center gap-3 bg-red-500/10 hover:bg-red-500 border border-red-500/20 hover:border-red-400 px-4 py-2 lg:px-6 lg:py-3 rounded-xl lg:rounded-2xl transition-all shadow-xl active:scale-95"
                      >
                         <i className="fa-solid fa-power-off text-red-500 group-hover:text-white text-xs lg:text-base"></i>
