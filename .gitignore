@@ -22,27 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
--e 
-# Environment files
+
+# Environment files - JANGAN PUSH KE GITHUB
+.env
+.env.*
 *.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
--e 
-# Environment files
-*.env
-*.env.*
