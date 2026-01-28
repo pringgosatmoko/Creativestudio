@@ -20,7 +20,7 @@ interface ProfileSettingsProps {
   lang: 'id' | 'en';
 }
 
-export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ onBack, userEmail, credits, validUntil, lang }) => {
+export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ onBack, userEmail, credits, validUntil, lang, onLogout }) => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
