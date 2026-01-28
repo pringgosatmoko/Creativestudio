@@ -405,7 +405,7 @@ const App: React.FC = () => {
                           case 'direct-chat': return <DirectChat isAdmin={isAdmin} adminEmail={adminEmail} {...props} />;
                           case 'profile': return (
                             <div className="space-y-6">
-                              <ProfileSettings {...props} />
+                              <ProfileSettings {...props} onLogout={handleLogout} />
                             </div>
                           );
                           case 'topup': return <TopupCenter {...props} />;
