@@ -426,6 +426,11 @@ const App: React.FC = () => {
                 <SideIcon active={activeFeature === 'img2vid'} icon="fa-video" onClick={() => setActiveFeature('img2vid')} label={t.video} />
                 <SideIcon active={activeFeature === 'profile'} icon="fa-user-shield" onClick={() => setActiveFeature('profile')} label={t.profile} />
              </div>
+
+             {/* COPYRIGHT - Desktop */}
+             <div className="hidden lg:block fixed bottom-4 left-1/2 -translate-x-1/2 z-[50]">
+                <p className="text-[9px] font-bold text-slate-600 uppercase tracking-[0.3em]">© Satmoko Studio 2026</p>
+             </div>
           </motion.div>
         )}
       </AnimatePresence>
