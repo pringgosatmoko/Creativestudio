@@ -165,12 +165,38 @@ export const MemberControl: React.FC<MemberControlProps> = ({ onBack, lang }) =>
                             <p className="text-[11px] font-black text-white truncate uppercase tracking-tighter">{m.full_name || 'MEMBER'}</p>
                             <p className="text-[8px] text-slate-600 truncate">{m.email}</p>
                          </div>
+                         <span className={`px-2 py-1 rounded-lg text-[7px] font-black uppercase tracking-wider ${m.status === 'active' ? 'bg-green-500/10 text-green-500' : m.status === 'pending' ? 'bg-yellow-500/10 text-yellow-500' : 'bg-slate-500/10 text-slate-500'}`}>
+                           {m.status || 'inactive'}
+                         </span>
                       </div>
                       <div className="flex justify-between items-center px-2 bg-black/40 py-3 rounded-xl border border-white/5">
                          <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest">Kredit Aktif</p>
                          <p className="text-lg font-black text-cyan-400 italic">{(m.credits || 0).toLocaleString()} CR</p>
                       </div>
-                      <button onClick={() => { setEditingMember(m); setNewCreditValue(m.credits || 0); }} className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-[9px] font-black uppercase text-slate-500 hover:text-white transition-all">EDIT SALDO MANUAL</button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button onClick={() => { setEditingMember(m); setNewCreditValue(m.credits || 0); }} className="py-2.5 rounded-xl bg-white/5 border border-white/10 text-[8px] font-black uppercase text-slate-500 hover:text-white transition-all">
+                          <i className="fa-solid fa-coins mr-1"></i> EDIT SALDO
+                        </button>
+                        {m.status === 'pending' ? (
+                          <button 
+                            onClick={() => handleApproveMember(m)} 
+                            disabled={isProcessing}
+                            data-testid={`approve-member-${m.id}`}
+                            className="py-2.5 rounded-xl bg-green-500/10 border border-green-500/20 text-[8px] font-black uppercase text-green-500 hover:bg-green-500 hover:text-white transition-all"
+                          >
+                            <i className="fa-solid fa-check mr-1"></i> APPROVE
+                          </button>
+                        ) : (
+                          <button 
+                            onClick={() => handleDeleteMember(m)} 
+                            disabled={isProcessing}
+                            data-testid={`delete-member-${m.id}`}
+                            className="py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-[8px] font-black uppercase text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                          >
+                            <i className="fa-solid fa-trash mr-1"></i> HAPUS
+                          </button>
+                        )}
+                      </div>
                    </div>
                  ))}
                  {members.length === 0 && <div className="col-span-full py-20 text-center opacity-10 flex flex-col items-center gap-6"><i className="fa-solid fa-users-slash text-7xl"></i><p className="text-xs font-black uppercase tracking-[0.5em]">BELUM ADA MEMBER</p></div>}
